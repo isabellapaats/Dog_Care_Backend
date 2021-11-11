@@ -12,9 +12,11 @@ memory_orders = []
 memory_dogs = []
 order_id = 0
 
+
 @app.route('/')
 def hello_world():  # put application's code here
     return 'Hello World!'
+
 
 @app.route('/api/v1/orders', methods=["GET", "POST"])
 def Orders():
@@ -39,9 +41,12 @@ def Orders():
 
     if is_get_all:
         return jsonify(memory_orders)
+
+
 def generate_order_id():
     order_id.__add__(1)
     return str((len(memory_orders) + 1)).rjust(10, "0")
+
 
 @app.route('/api/v1/registros', methods=["GET", "POST"])
 def registros():
@@ -62,6 +67,7 @@ def registros():
     if is_get:
         return "hola"
 
+
 @app.route('/api/v1/perros', methods=["GET", "POST"])
 def Dogs():
     is_created = flask.request.method == 'POST'
@@ -81,5 +87,6 @@ def Dogs():
     if is_get:
         return jsonify(memory_dogs)
 
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', port=5001)

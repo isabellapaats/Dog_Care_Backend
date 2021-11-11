@@ -1,5 +1,5 @@
 import flask
-from flask import Flask
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 
@@ -21,29 +21,18 @@ def registrarse():
 
     if is_registered:
         body = flask.request.json
-        nuevo_usuario = Usuarios(
-            body["user"],
-            body["surname"],
-            body["email"],
-            body["password"],
-        )
-        memory_users.append(nuevo_usuario.to_json())
+        nuevo_registro = {
+           "user_name": body["user"],
+           "user_surname": body["surname"],
+           "user_mail": body["mail"],
+           "user_password": body["password"],
 
-    return flask.jsonify(nuevo_usuario)
+       }
+        memory_users.append(nuevo_registro)
+        return jsonify({"registro": nuevo_registro, "mensaje": "usuario registrado correctamente", "status": "ok"})
 
     if is_get:
-        return flask.jsonify(memory_users)
-
-
-class Usuarios:
-    def _init_(self, user_name, user_surname, user_email, user_password):
-        self.user_name = user_name
-        self.user_surname = user_surname
-        self.user_email = user_email
-        self.user_password = user_password
-
-    def to_json(self):
-        return self._dict_
+        return "hola"
 
 
 if __name__ == '_main_':

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="09bdda34-52c3-429b-a982-27f02e764338" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Dog_care_API/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dog_care_API/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dog_care_API/models.py" beforeDir="false" />
-    </list>
+    <list default="true" id="09bdda34-52c3-429b-a982-27f02e764338" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,6 +69,7 @@
       <workItem from="1636647554262" duration="1289000" />
       <workItem from="1636659092633" duration="2445000" />
       <workItem from="1636662447818" duration="563000" />
+      <workItem from="1636666077273" duration="131000" />
     </task>
     <servers />
   </component>
@@ -80,7 +78,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Dog_Care_Backend$Flask__Dog_care_API_app_py_.coverage" NAME="Flask (Dog_care_API/app.py) Coverage Results" MODIFIED="1636662658166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/Dog_Care_Backend$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1636659474254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Dog_Care_Backend$test.coverage" NAME="test Coverage Results" MODIFIED="1636647980163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Dog_care_API" />
+    <SUITE FILE_PATH="coverage/Dog_Care_Backend$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1636659474254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

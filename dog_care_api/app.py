@@ -1,3 +1,4 @@
+
 import flask
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -19,12 +20,13 @@ def hello_world():  # put application's code here
 
 @app.route('/api/v1/orders', methods=["GET", "POST"])
 def Orders():
-    is_create = flask.request.method == 'POST'
+
+    order_id_gen = generate_order_id()
     is_get_all = flask.request.method == 'GET'
+    is_create = flask.request.method == 'POST'
 
     if is_create:
         body = flask.request.json
-        order_id_gen = generate_order_id()
         new_order = Order(
             order_id_gen,
             body["name"],
@@ -55,7 +57,7 @@ def registros():
     if is_registered:
         body = flask.request.json
         new_user = User(
-            body["name"],
+            body["user"],
             body["surname"],
             body["email"],
             body["password"]
@@ -67,7 +69,7 @@ def registros():
         return jsonify(memory_users)
 
 
-@app.route('/api/v1/perros', methods=["GET", "POST", "POST"])
+@app.route('/api/v1/perros', methods=["GET", "POST", "DELETE"])
 def Dogs():
     added = flask.request.method == 'POST'
     is_get = flask.request.method == 'GET'
@@ -89,6 +91,7 @@ def Dogs():
 
     if is_delete:
         return "no se como es esto"
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

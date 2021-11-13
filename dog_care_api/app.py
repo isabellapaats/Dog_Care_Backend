@@ -54,7 +54,10 @@ def registros():
     if is_registered:
         body = flask.request.json
         new_user = User(
+            body["name"],
+            body["surname"],
             body["email"],
+            body["password"]
         )
 
         if loop(new_user.email):

@@ -14,8 +14,11 @@ class Order:
 
 
 class User:
-    def __init__(self, email):
+    def __init__(self, name, surname,email, password):
+        self.name = name
+        self.surname = surname
         self.email = email
+        self.password = password
 
     def to_json(self):
         return self.__dict__

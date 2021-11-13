@@ -10,6 +10,8 @@ memory_users = []
 memory_orders = []
 memory_dogs = []
 order_id = 0
+user_id = 0
+
 
 @app.route('/')
 def hello_world():  # put application's code here
@@ -52,8 +54,10 @@ def registros():
     is_get = flask.request.method == 'GET'
 
     if is_registered:
+        user_id_gen = generate_user_id()
         body = flask.request.json
         new_user = User(
+            user_id_gen,
             body["name"],
             body["surname"],
             body["email"],
@@ -69,6 +73,8 @@ def registros():
     if is_get:
         return jsonify(memory_users)
 
+
+
 def loop(x):
     b = ""
     if (len(memory_users) != 0):
@@ -78,6 +84,39 @@ def loop(x):
         return b
     else:
         return False
+
+
+def generate_user_id():
+    user_id.__add__(1)
+    return str((len(memory_users) + 1)).rjust(10, "0")
+
+
+@app.route('/api/v1/registro/<id>', methods=["DELETE", "PUT"])
+def registro(id):
+    is_change = flask.request.method = 'PUT'
+    is_delete = flask.request.method = 'DELETE'
+
+    if is_change:
+        body = flask.request.json
+        changed_user = changeUser(
+            body["newpassword"]
+        )
+        for user in memory_users:
+            if user["user_id"] == id:
+                user["password"] = changed_user["newpassword"]
+
+        return {"Usuario": changed_user.to_json(), "mensaje": "Contraseña actualizada exitosamente", "status": "ok"}
+
+    if is_delete:
+        body = flask.request.json
+        usuario = User(
+            body["name"],
+            body["surname"],
+            body["email"],
+            body["password"]
+        )
+        memory_users.remove(usuario.to_json())
+        return {"Usuario": usuario.to_json(), "mensaje": "Usuario eliminado exitosamente", "status": "ok"}
 
 @app.route('/api/v1/perros', methods=["GET", "POST", "DELETE"])
 def Dogs():

@@ -14,7 +14,8 @@ class Order:
 
 
 class User:
-    def __init__(self, name, surname,email, password):
+    def __init__(self, user_id, name, surname,email, password):
+        self.user_id = user_id
         self.name = name
         self.surname = surname
         self.email = email
@@ -23,6 +24,13 @@ class User:
     def to_json(self):
         return self.__dict__
 
+
+class changeUser:
+    def __init__(self, newpassword):
+        self.newpassword = newpassword
+
+    def to_json(self):
+        return self.__dict__
 
 class Dog:
     def __init__(self, name, raza, edad, lugar):

@@ -1,7 +1,7 @@
 import flask
 from flask import Flask, jsonify, request, json
 from flask_cors import CORS
-from models import Order, User, Dog, ChangeUser
+from models import Order, User, Dog
 
 app = Flask(__name__)
 CORS(app)
@@ -92,38 +92,29 @@ def generate_user_id():
     return str((len(memory_users) + 1)).rjust(10, "0")
 
 
-@app.route('/api/v1/delete/<id>', methods=["DELETE", "GET"])
-def delete(id):
+@app.route('/api/v1/registros/<id_usuario>', methods=["DELETE", "GET", "PUT"])
+def delete(id_usuario):
 
     if flask.request.method == 'DELETE':
         for user in memory_users:
-            if user["user_id"] == id:
+            if user["user_id"] == id_usuario:
                 memory_users.remove(user)
-                return "ok"
-
-    return {"Usuario": user.to_json(), "mensaje": "Usuario eliminado exitosamente", "status": "ok"}
-
-
-@app.route('/api/v1/registros/<userNumber>', methods=["PUT", "GET"])
-def change(userNumber):
+                return {"Usuario": user.to_json(), "mensaje": "Usuario eliminado exitosamente", "status": "ok"}
 
     if flask.request.method == 'PUT':
         body = flask.request.json
-        changed_user = ChangeUser(
-            body["newpassword"])
 
         for user in memory_users:
-            if user["user_id"] == userNumber:
-                user["password"] = changed_user["newpassword"]
+            if user["user_id"] == id_usuario:
+                user["password"] = body["newpassword"]
 
-        return {"Usuario": changed_user.to_json(), "mensaje": "Contraseña actualizada exitosamente", "status": "ok"}
+                return jsonify({"mensaje": "Contraseña actualizada exitosamente", "status": "ok"})
 
 
-@app.route('/api/v1/perros', methods=["GET", "POST", "DELETE"])
+@app.route('/api/v1/perros', methods=["GET", "POST"])
 def Dogs():
     added = flask.request.method == 'POST'
     is_get = flask.request.method == 'GET'
-    is_delete = flask.request.method == 'DELETE'
 
     if added:
         body = flask.request.json
@@ -138,9 +129,6 @@ def Dogs():
 
     if is_get:
         return jsonify(memory_dogs)
-
-    if is_delete:
-        return "no se como es esto"
 
 
 if __name__ == '__main__':

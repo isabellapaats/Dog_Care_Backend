@@ -1,7 +1,7 @@
 import flask
 from flask import Flask, jsonify, request, json
 from flask_cors import CORS
-from models import Order, User, Dog, changeUser
+from models import Order, User, Dog, ChangeUser
 
 app = Flask(__name__)
 CORS(app)
@@ -92,28 +92,31 @@ def generate_user_id():
     return str((len(memory_users) + 1)).rjust(10, "0")
 
 
-@app.route('/api/v1/registros/<id>', methods=["DELETE", "PUT"])
-def funcion(id):
-    is_change = flask.request.method = 'PUT'
-    is_delete = flask.request.method = 'DELETE'
+@app.route('/api/v1/delete/<id>', methods=["DELETE", "GET"])
+def delete(id):
 
-    if is_change:
-        body = flask.request.json
-        changed_user = changeUser(
-            body["newpassword"]
-        )
-        for user in memory_users:
-            if user["user_id"] == id:
-                user["password"] = changed_user["newpassword"]
-
-        return {"Usuario": changed_user.to_json(), "mensaje": "Contraseña actualizada exitosamente", "status": "ok"}
-
-    if is_delete:
+    if flask.request.method == 'DELETE':
         for user in memory_users:
             if user["user_id"] == id:
                 memory_users.remove(user)
+                return "ok"
 
-                return {"Usuario": user.to_json(), "mensaje": "Usuario eliminado exitosamente", "status": "ok"}
+    return {"Usuario": user.to_json(), "mensaje": "Usuario eliminado exitosamente", "status": "ok"}
+
+
+@app.route('/api/v1/registros/<userNumber>', methods=["PUT", "GET"])
+def change(userNumber):
+
+    if flask.request.method == 'PUT':
+        body = flask.request.json
+        changed_user = ChangeUser(
+            body["newpassword"])
+
+        for user in memory_users:
+            if user["user_id"] == userNumber:
+                user["password"] = changed_user["newpassword"]
+
+        return {"Usuario": changed_user.to_json(), "mensaje": "Contraseña actualizada exitosamente", "status": "ok"}
 
 
 @app.route('/api/v1/perros', methods=["GET", "POST", "DELETE"])

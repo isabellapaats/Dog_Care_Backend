@@ -1,13 +1,13 @@
 class Order:
-    def __init__(self, order_id, customer_name, customer_surname, phone_number, address, postalCode, email, pedido):
+    def __init__(self, order_id, name, surname, phoneNumber, location, postalCode, email, pedidos):
         self.order_id = order_id
-        self.customer_name = customer_name
-        self.customer_surname = customer_surname
-        self.phone_number = phone_number
-        self.address = address
+        self.name = name
+        self.surname = surname
+        self.phoneNumber = phoneNumber
+        self.location = location
         self.postalCode = postalCode
         self.email = email
-        self.pedido = pedido
+        self.pedidos = pedidos
 
     def to_json(self):
         return self.__dict__
@@ -25,7 +25,7 @@ class User:
         return self.__dict__
 
 
-class changeUser:
+class ChangeUser:
     def __init__(self, newpassword):
         self.newpassword = newpassword
 

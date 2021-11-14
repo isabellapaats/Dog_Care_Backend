@@ -99,7 +99,7 @@ def delete(id_usuario):
         for user in memory_users:
             if user["user_id"] == id_usuario:
                 memory_users.remove(user)
-                return {"Usuario": user.to_json(), "mensaje": "Usuario eliminado exitosamente", "status": "ok"}
+                return jsonify({"Usuario": user, "mensaje": "Usuario eliminado exitosamente", "status": "ok"})
 
     if flask.request.method == 'PUT':
         body = flask.request.json
@@ -129,6 +129,20 @@ def Dogs():
 
     if is_get:
         return jsonify(memory_dogs)
+
+
+@app.route('/api/v1/perro', methods=["GET"])
+def buscarPerro():
+    is_get = flask.request.method == 'GET'
+
+    if is_get:
+        nombre = request.args.get('name')
+        perros_found = []
+        for dog in memory_dogs:
+            if dog['name'] == nombre:
+                perros_found.append(dog)
+
+        return jsonify(perros_found)
 
 
 if __name__ == '__main__':

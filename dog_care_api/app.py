@@ -106,9 +106,12 @@ def delete(id_usuario):
 
         for user in memory_users:
             if user["user_id"] == id_usuario:
-                user["password"] = body["newpassword"]
-
-                return jsonify({"mensaje": "Contraseña actualizada exitosamente", "status": "ok"})
+                if user["password"] != body["newpassword"]:
+                    user["password"] = body["newpassword"]
+                    return jsonify({"mensaje": "Contraseña actualizada exitosamente", "status": "ok"})
+                else:
+                    user["password"] = user["password"]
+                    return jsonify({"mensaje": "Ingrese una contraseña distinta a la anterior", "status": "ok"})
 
 
 @app.route('/api/v1/perros', methods=["GET", "POST"])
@@ -122,7 +125,8 @@ def Dogs():
             body["name"],
             body["raza"],
             body["edad"],
-            body["lugar"]
+            body["lugar"],
+            body["img"]
         )
         memory_dogs.append(new_dog.to_json())
         return {"Perro": new_dog.to_json(), "mensaje": "Masota agregada exitosamente", "status": "ok"}

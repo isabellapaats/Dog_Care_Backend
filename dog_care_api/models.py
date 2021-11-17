@@ -34,10 +34,10 @@ class ChangeUser:
 
 
 class Dog:
-    def __init__(self, name, raza, edad, lugar, img):
+    def __init__(self, name, edad, tel, lugar, img):
         self.name = name
-        self.raza = raza
         self.edad = edad
+        self.tel = tel
         self.lugar = lugar
         self.img = img
 

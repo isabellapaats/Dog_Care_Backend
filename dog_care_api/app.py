@@ -123,8 +123,8 @@ def Dogs():
         body = flask.request.json
         new_dog = Dog(
             body["name"],
-            body["raza"],
             body["edad"],
+            body["tel"],
             body["lugar"],
             body["img"]
         )
